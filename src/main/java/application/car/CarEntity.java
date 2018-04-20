@@ -17,16 +17,19 @@ public class CarEntity {
     @NotBlank
     private String model;
     private Integer horsePower;
+    private String bodyType;
     private String engine;
     private Integer productionYear;
     private String drivetrain;
     private Integer mileage;
     private String color;
 
-    public CarEntity(String brand, String model, Integer horsePower, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
+
+    public CarEntity(String brand, String model, Integer horsePower,String bodyType, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
         this.brand = brand;
         this.model = model;
         this.horsePower = horsePower;
+        this.bodyType = bodyType;
         this.engine = engine;
         this.productionYear = productionYear;
         this.drivetrain = drivetrain;
@@ -40,6 +43,14 @@ public class CarEntity {
     }
 
     public CarEntity() {
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
     }
 
     public Integer getId() {

@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
-
 /**
  * Created by Lenovo on 2018-03-26.
  */
@@ -32,11 +30,16 @@ public class ViewController {
         return "test";
     }
     @PostMapping("")
-    public String add(Model model, @ModelAttribute CarDTO carDTO, BindingResult bindingResult, @RequestParam String submit){
+    public String add(@ModelAttribute CarDTO carDTO, BindingResult bindingResult, @RequestParam String submit){
         if(bindingResult.hasErrors()) return "redirect:";
+        if (submit.equals("Add car"))
         service.addCar(carDTO);
-        return "BrandSearch";
+        else{
+            service.deleteByID(Integer.parseInt(submit));
+        }
+        return "redirect:";
     }
+
     @GetMapping("/{brand}")
     public String searchByBrand(Model model, @PathVariable String brand){
         model.addAttribute("brand",service.getCarsByBrand(brand));

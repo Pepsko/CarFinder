@@ -4,19 +4,23 @@ import java.time.LocalDate;
 
 public class CarDTO {
 
+    private Integer id;
     private String brand;
     private String model;
     private Integer horsePower;
+    private String bodyType;
     private String engine;
     private Integer productionYear;
     private String drivetrain;
     private Integer mileage;
     private String color;
 
-    public CarDTO(String brand, String model, Integer horsePower, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
+    public CarDTO(Integer id, String brand, String model, Integer horsePower, String bodyType, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.horsePower = horsePower;
+        this.bodyType = bodyType;
         this.engine = engine;
         this.productionYear = productionYear;
         this.drivetrain = drivetrain;
@@ -30,6 +34,22 @@ public class CarDTO {
     }
 
     public CarDTO() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
     }
 
     public String getEngine() {

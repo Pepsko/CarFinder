@@ -24,11 +24,11 @@ public class CarService {
         repository.save(toEntity(carDTO));
     }
     private CarDTO toDTO(CarEntity entity){
-        return new CarDTO(entity.getBrand(),entity.getModel(),entity.getHorsePower(),entity.getEngine(),entity.getProductionYear(),entity.getDrivetrain(),entity.getMileage(),entity.getColor());
+        return new CarDTO(entity.getId(),entity.getBrand(),entity.getModel(),entity.getHorsePower(),entity.getBodyType(),entity.getEngine(),entity.getProductionYear(),entity.getDrivetrain(),entity.getMileage(),entity.getColor());
     }
 
     private CarEntity toEntity(CarDTO dto){
-        return new CarEntity(dto.getBrand(),dto.getModel(),dto.getHorsePower(),dto.getEngine(),dto.getProductionYear(),dto.getDrivetrain(),dto.getMileage(),dto.getColor());
+        return new CarEntity(dto.getBrand(),dto.getModel(),dto.getHorsePower(),dto.getBodyType(), dto.getEngine(),dto.getProductionYear(),dto.getDrivetrain(),dto.getMileage(),dto.getColor());
     }
 
     public List<CarDTO> findAll(){
@@ -45,6 +45,10 @@ public class CarService {
             set.add(toDTO(temp));
         }
         return set;
+    }
+
+    public void deleteByID(Integer id){
+        repository.delete(id);
     }
 
 

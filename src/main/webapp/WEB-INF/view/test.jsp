@@ -21,13 +21,19 @@ zobaczmy czy teraz dziala
     <form:input type="text" path="horsePower"/>
     <form:input type="text" path="engine"/>
     <form:input type="text" path="productionYear"/>
-    <form:input type="text" path="drivetrain"/>
+    <form:select path="drivetrain">
+        <form:option value="AWD">AWD</form:option>
+        <form:option value="RWD">RWD</form:option>
+        <form:option value="FWD">FWD</form:option>
+    </form:select>
     <form:input type="text" path="mileage"/>
     <form:input type="text" path="color"/>
     <input type="submit" name="submit" value="Add car">
 </form:form>
+<form:form method="post" modelAttribute="carDTO">
 <c:forEach items="${cars}" var="item">
-    <li>${item}</li><br>
+    <li>${item} <form:button type="submit" name="submit" value="${item.id}">Delete</form:button> </li><br>
 </c:forEach>
+</form:form>
 </body>
 </html>
