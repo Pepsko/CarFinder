@@ -15,8 +15,9 @@ public class CarService {
     private final CarRepository repository;
 
     @Autowired
-    public CarService(CarRepository repository) {
+    public CarService(CarRepository repository){
         this.repository = repository;
+
     }
 
     public void addCar(CarDTO carDTO){
@@ -28,7 +29,7 @@ public class CarService {
     }
 
     private CarEntity toEntity(CarDTO dto){
-        return new CarEntity(dto.getBrand(),dto.getModel(),dto.getHorsePower(),dto.getBodyType(), dto.getEngine(),dto.getProductionYear(),dto.getDrivetrain(),dto.getMileage(),dto.getColor());
+        return new CarEntity(dto.getBrand(),dto.getModel(),dto.getHorsePower(),dto.getBodyType(), dto.getEngine(),dto.getProductionYear(),dto.getDrivetrain(),dto.getMileage(), dto.getColor());
     }
 
     public List<CarDTO> findAll(){

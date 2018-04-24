@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.time.LocalDate;
 
 @Entity
@@ -22,7 +23,10 @@ public class CarEntity {
     private Integer productionYear;
     private String drivetrain;
     private Integer mileage;
+  //  private String fuel;
     private String color;
+ //   private URL url;
+
 
 
     public CarEntity(String brand, String model, Integer horsePower,String bodyType, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
@@ -34,6 +38,7 @@ public class CarEntity {
         this.productionYear = productionYear;
         this.drivetrain = drivetrain;
         this.mileage = mileage;
+   //     this.fuel = fuel;
         this.color = color;
     }
 
@@ -44,6 +49,7 @@ public class CarEntity {
 
     public CarEntity() {
     }
+
 
     public String getBodyType() {
         return bodyType;
