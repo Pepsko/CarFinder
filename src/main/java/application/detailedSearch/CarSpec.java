@@ -1,18 +1,19 @@
-package application.car;
+package application.detailedSearch;
 
 public class CarSpec {
     private String brand;
     private String model;
-    private Integer powerFrom;
-    private Integer powerTo;
+    private String powerFrom;
+    private String powerTo;
     private String bodyType;
-    private Integer productionFrom;
-    private Integer productionTo;
-    private Integer maxMileage;
+    private String productionFrom;
+    private String productionTo;
+    private String mileageFrom;
+    private String mileageTo;
     private String drivetrain;
     private String color;
 
-    public CarSpec(String brand, String model, Integer powerFrom, Integer powerTo, String bodyType, Integer productionFrom, Integer productionTo, Integer mileageFrom,  String color) {
+    public CarSpec(String brand, String model, String powerFrom, String powerTo, String bodyType, String productionFrom, String productionTo, String mileageFrom, String color) {
         this.brand = brand;
         this.model = model;
         this.powerFrom = powerFrom;
@@ -20,7 +21,7 @@ public class CarSpec {
         this.bodyType = bodyType;
         this.productionFrom = productionFrom;
         this.productionTo = productionTo;
-        this.maxMileage = mileageFrom;
+        this.mileageTo = mileageFrom;
         this.color = color;
     }
 
@@ -33,6 +34,14 @@ public class CarSpec {
 
     public String getDrivetrain() {
         return drivetrain;
+    }
+
+    public String getMileageFrom() {
+        return mileageFrom;
+    }
+
+    public void setMileageFrom(String mileageFrom) {
+        this.mileageFrom = mileageFrom;
     }
 
     public void setDrivetrain(String drivetrain) {
@@ -55,19 +64,19 @@ public class CarSpec {
         this.model = model;
     }
 
-    public Integer getPowerFrom() {
+    public String getPowerFrom() {
         return powerFrom;
     }
 
-    public void setPowerFrom(Integer powerFrom) {
+    public void setPowerFrom(String powerFrom) {
         this.powerFrom = powerFrom;
     }
 
-    public Integer getPowerTo() {
+    public String getPowerTo() {
         return powerTo;
     }
 
-    public void setPowerTo(Integer powerTo) {
+    public void setPowerTo(String powerTo) {
         this.powerTo = powerTo;
     }
 
@@ -79,28 +88,28 @@ public class CarSpec {
         this.bodyType = bodyType;
     }
 
-    public Integer getProductionFrom() {
+    public String getProductionFrom() {
         return productionFrom;
     }
 
-    public void setProductionFrom(Integer productionFrom) {
+    public void setProductionFrom(String productionFrom) {
         this.productionFrom = productionFrom;
     }
 
-    public Integer getProductionTo() {
+    public String getProductionTo() {
         return productionTo;
     }
 
-    public void setProductionTo(Integer productionTo) {
+    public void setProductionTo(String productionTo) {
         this.productionTo = productionTo;
     }
 
-    public Integer getMaxMileage() {
-        return maxMileage;
+    public String getMileageTo() {
+        return mileageTo;
     }
 
-    public void setMaxMileage(Integer maxMileage) {
-        this.maxMileage = maxMileage;
+    public void setMileageTo(String mileageTo) {
+        this.mileageTo = mileageTo;
     }
 
     public String getColor() {

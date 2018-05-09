@@ -1,8 +1,14 @@
 package application.car;
 
+import application.detailedSearch.CarSpec;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,5 +59,24 @@ public class CarService {
     }
 
 
-
+    /*  public boolean carMeetsCriteria(CarSpec spec, CarDTO carDTO){
+          boolean brand = spec.getBrand().equals(carDTO.getBrand());
+          boolean model=true, body=true, power, productionYear, drivetrain=true, mileage, color = true;
+          power = spec.getPowerFrom()<carDTO.getHorsePower() && spec.getPowerTo()>carDTO.getHorsePower();
+          if(spec.getModel()!= null){
+              model = spec.getModel().equals(carDTO.getModel());
+          }
+          if(spec.getBodyType()!=null){
+              body = spec.getBodyType().equals(carDTO.getBodyType());
+          }
+          productionYear = spec.getProductionFrom()<carDTO.getProductionYear()&&spec.getPowerTo()>carDTO.getHorsePower();
+          if(spec.getDrivetrain()!=null){
+              drivetrain = spec.getDrivetrain().equals(carDTO.getDrivetrain());
+          }
+          mileage = spec.getMileageTo()>carDTO.getMileage();
+          if(spec.getColor()!= null){
+              color = spec.getColor().equals(carDTO.getColor());
+          }
+          return brand && model && body && power && productionYear && drivetrain && mileage && color;
+      }*/
 }

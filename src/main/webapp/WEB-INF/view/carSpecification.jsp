@@ -65,16 +65,19 @@
         <form:option value="Combi"/>
         <form:option value="Hatchback"/>
         <form:option value="Compact"/>
+        <form:option value="">Any of above</form:option>
     </form:select>
     <br>
     Production year from :
     <form:select path="productionFrom">
+        <form:option value="">No limit</form:option>
         <c:forEach var="i" begin="1960" end="2018">
             <form:option value="${i}"/>
         </c:forEach>
     </form:select>
     To :
     <form:select path="productionTo">
+        <form:option value="">No limit</form:option>
         <c:forEach var="i" begin="1960" end="2018">
             <form:option value="${i}"/>
         </c:forEach>
@@ -85,10 +88,11 @@
         <form:option value="AWD">AWD</form:option>
         <form:option value="RWD">RWD</form:option>
         <form:option value="FWD">FWD</form:option>
+        <form:option value="">Any of above</form:option>
     </form:select>
     <br>
     Max mileage :
-    <form:select path="maxMileage">
+    <form:select path="mileageTo">
         <form:option value="-1">No limit</form:option>
         <c:forEach var="i" begin="100000" step="50000" end="1000000">
             <form:option value="${i}"/>

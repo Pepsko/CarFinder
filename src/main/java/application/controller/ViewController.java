@@ -2,15 +2,10 @@ package application.controller;
 
 import application.car.CarDTO;
 import application.car.CarService;
-import application.car.CarSpec;
-import application.fileHandlers.CSVCarList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Lenovo on 2018-03-26.
