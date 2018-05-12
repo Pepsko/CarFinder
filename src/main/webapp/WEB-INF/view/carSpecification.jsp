@@ -45,14 +45,14 @@
     <br>
     Power from :
     <form:select path="powerFrom">
-        <form:option value="0">No bottom limit</form:option>
+        <form:option value="">No bottom limit</form:option>
         <c:forEach var="i" begin="25" step="25" end="500">
             <form:option value="${i}">${i}hp</form:option>
         </c:forEach>
     </form:select>
      To :
     <form:select path="powerTo">
-        <form:option value="10000">No limit</form:option>
+        <form:option value="">No limit</form:option>
         <c:forEach var="i" begin="50" step="25" end="500">
             <form:option value="${i}">${i}hp</form:option>
         </c:forEach>
@@ -93,7 +93,7 @@
     <br>
     Max mileage :
     <form:select path="mileageTo">
-        <form:option value="-1">No limit</form:option>
+        <form:option value="">No limit</form:option>
         <c:forEach var="i" begin="100000" step="50000" end="1000000">
             <form:option value="${i}"/>
         </c:forEach>
@@ -114,7 +114,7 @@
         <form:option value="Silver"/>
         <form:option value="White"/>
         <form:option value="Yellow"/>
-        <form:option value="Other"/>
+        <form:option value="">Other</form:option>
     </form:select>
     <br>
     <form:button type="submit" name="submit" value="brand">chose</form:button>

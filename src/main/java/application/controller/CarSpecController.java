@@ -4,6 +4,8 @@ import application.car.CarService;
 import application.detailedSearch.CarSpec;
 import application.detailedSearch.SearchService;
 import application.fileHandlers.CSVCarList;
+import application.fileHandlers.HTMLParser;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +21,8 @@ public class CarSpecController {
     private final CarService service;
     private final Map<String, Set<String>> brandsAndModels;
     private final SearchService searchService;
-    private Set<String> offers;
+    private Map<String, String> offers;
+    private Map<String, String> images;
 
     @ModelAttribute
     public CarSpec defaultCar(){
@@ -52,7 +55,9 @@ public class CarSpecController {
     @PostMapping("/{brand}")
     public String postSpecifyBrand(@PathVariable String brand, @ModelAttribute CarSpec carSpec, BindingResult bindingResult) throws IOException {
         if(bindingResult.hasErrors()) return "redirect:/specification/{brand}";
-        offers = searchService.collectCarOffers(searchService.findCarBySpec(carSpec));
+        Elements hrefs = HTMLParser.getLinksFromUrl(searchService.getSearchUrlBySpec(carSpec));
+        offers = searchService.collectCarOffers(hrefs);
+        images = searchService.mapOffersImages(hrefs);
         return "redirect:/specification/{brand}/"+carSpec.getModel();
     }
     @GetMapping("/{brand}/{model}")
@@ -60,6 +65,7 @@ public class CarSpecController {
         //attributes.addAttribute("brand", brand);
         //attributes.addAttribute("models", model);
         attributes.addAttribute("offers",offers);
+        attributes.addAttribute("images", images);
         return "OffersDisplay";
     }
    /* @PostMapping("/{brand}/{model}")

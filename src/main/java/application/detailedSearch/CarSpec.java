@@ -1,17 +1,17 @@
 package application.detailedSearch;
 
 public class CarSpec {
-    private String brand;
-    private String model;
-    private String powerFrom;
-    private String powerTo;
-    private String bodyType;
-    private String productionFrom;
-    private String productionTo;
-    private String mileageFrom;
-    private String mileageTo;
-    private String drivetrain;
-    private String color;
+    private String brand="";
+    private String model="";
+    private String powerFrom="";
+    private String powerTo="";
+    private String bodyType="";
+    private String productionFrom="";
+    private String productionTo="";
+    private String mileageFrom="";
+    private String mileageTo="";
+    private String drivetrain="";
+    private String color="";
 
     public CarSpec(String brand, String model, String powerFrom, String powerTo, String bodyType, String productionFrom, String productionTo, String mileageFrom, String color) {
         this.brand = brand;
@@ -118,5 +118,22 @@ public class CarSpec {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "CarSpec{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", powerFrom='" + powerFrom + '\'' +
+                ", powerTo='" + powerTo + '\'' +
+                ", bodyType='" + bodyType + '\'' +
+                ", productionFrom='" + productionFrom + '\'' +
+                ", productionTo='" + productionTo + '\'' +
+                ", mileageFrom='" + mileageFrom + '\'' +
+                ", mileageTo='" + mileageTo + '\'' +
+                ", drivetrain='" + drivetrain + '\'' +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

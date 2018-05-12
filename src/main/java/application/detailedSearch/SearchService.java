@@ -7,8 +7,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class SearchService {
@@ -20,7 +19,7 @@ public class SearchService {
         }
         return sb.toString();
     }
-    public  String findCarBySpec(CarSpec spec){
+    public String getSearchUrlBySpec(CarSpec spec){
         StringBuilder sb = new StringBuilder();
         sb.append("https://www.otomoto.pl/osobowe/").append(spec.getBrand()).append("/").append(spec.getModel()).append("/").append(spec.getBodyType()).append("/")
                 .append("od-").append(spec.getProductionFrom()).append("/?search%5Bfilter_float_year%3Ato%5D=").append(spec.getProductionTo()).append("&")
@@ -39,14 +38,21 @@ public class SearchService {
         }
         return "search%5Bfilter_float_"+insert+"%3Afrom%5D="+fromString+"&search%5Bfilter_float_"+insert+"%3Ato%5D="+toString+"&";
     }
-    public Set<String> collectCarOffers(String url) throws IOException {
-        Set<String> offers = new HashSet<>();
-        Document doc = Jsoup.connect(url).get();
-        Elements links = doc.select("a[href]");
+    public Map<String, String> collectCarOffers(Elements links){
+        Map<String, String> offers = new TreeMap<>();
         for (Element temp: links) {
-            if(temp.attr("abs:href").contains("/oferta/"))
-                offers.add(temp.attr("abs:href"));
+            //if(temp.attr("abs:href").contains("/oferta/"))
+                offers.put(temp.attr("abs:href"), temp.attr("title"));
         }
         return offers;
+    }
+    public Map<String, String> mapOffersImages(Elements links){
+        Map<String, String> images = new HashMap<>();
+        for (Element temp:links) {
+            String url = temp.attr("style");
+            url = url.substring(url.indexOf("http"), url.indexOf("')"));
+            images.put(temp.attr("abs:href"), url);
+        }
+        return images;
     }
 }

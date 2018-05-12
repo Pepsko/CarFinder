@@ -12,9 +12,8 @@
     <title>Title</title>
 </head>
 <body>
-cokolwiek
-<c:forEach items="${offers}" var="item">
-    ${item}<br>
-</c:forEach>
+<c:forEach items="${offers}" var="item"><a href="${item.key}">${item.value}<img src="${images.get(item.key)}"></a><br></c:forEach>
+
+
 </body>
 </html>
