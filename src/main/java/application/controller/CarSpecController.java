@@ -55,7 +55,7 @@ public class CarSpecController {
     @PostMapping("/{brand}")
     public String postSpecifyBrand(@PathVariable String brand, @ModelAttribute CarSpec carSpec, BindingResult bindingResult) throws IOException {
         if(bindingResult.hasErrors()) return "redirect:/specification/{brand}";
-        Elements hrefs = HTMLParser.getLinksFromUrl(searchService.getSearchUrlBySpec(carSpec));
+        Elements hrefs = HTMLParser.getOffersLinksFromUrl(searchService.getSearchUrlBySpec(carSpec));
         offers = searchService.collectCarOffers(hrefs);
         images = searchService.mapOffersImages(hrefs);
         return "redirect:/specification/{brand}/"+carSpec.getModel();
