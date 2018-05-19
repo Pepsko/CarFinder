@@ -12,6 +12,7 @@ public class CarSpec {
     private String mileageTo="";
     private String drivetrain="";
     private String color="";
+    private String url="empty";
 
     public CarSpec(String brand, String model, String powerFrom, String powerTo, String bodyType, String productionFrom, String productionTo, String mileageFrom, String color) {
         this.brand = brand;
@@ -118,6 +119,14 @@ public class CarSpec {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

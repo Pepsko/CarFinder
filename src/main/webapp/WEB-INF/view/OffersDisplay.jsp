@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lenovo
@@ -12,8 +13,9 @@
     <title>Title</title>
 </head>
 <body>
-<c:forEach items="${offers}" var="item"><a href="${item.key}">${item.value}<img src="${images.get(item.key)}"></a><br></c:forEach>
-
+<form:form method="post" modelAttribute="carSpec">
+<c:forEach items="${offers}" var="item"><button type="submit" name="offer" value="${item.key}">${item.value}<img src="${images.get(item.key)}"></button><br></c:forEach>
+</form:form>
 
 </body>
 </html>

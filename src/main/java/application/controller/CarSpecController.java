@@ -2,9 +2,11 @@ package application.controller;
 
 import application.car.CarService;
 import application.detailedSearch.CarSpec;
+import application.detailedSearch.OfferDisplayService;
 import application.detailedSearch.SearchService;
 import application.fileHandlers.CSVCarList;
 import application.fileHandlers.HTMLParser;
+import application.session.SearchSession;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
+@SessionAttributes("searchSession")
 @RequestMapping("/specification")
 public class CarSpecController {
     private final CarService service;
@@ -24,6 +27,12 @@ public class CarSpecController {
     private Map<String, String> offers;
     private Map<String, String> images;
 
+
+
+    @ModelAttribute
+    public SearchSession session(){
+        return new SearchSession();
+    }
     @ModelAttribute
     public CarSpec defaultCar(){
         return new CarSpec("brand");
@@ -53,7 +62,7 @@ public class CarSpecController {
         return "carSpecification";
     }
     @PostMapping("/{brand}")
-    public String postSpecifyBrand(@PathVariable String brand, @ModelAttribute CarSpec carSpec, BindingResult bindingResult) throws IOException {
+    public String postSpecifyBrand( @ModelAttribute CarSpec carSpec, BindingResult bindingResult) throws IOException {
         if(bindingResult.hasErrors()) return "redirect:/specification/{brand}";
         Elements hrefs = HTMLParser.getOffersLinksFromUrl(searchService.getSearchUrlBySpec(carSpec));
         offers = searchService.collectCarOffers(hrefs);
@@ -68,10 +77,15 @@ public class CarSpecController {
         attributes.addAttribute("images", images);
         return "OffersDisplay";
     }
-   /* @PostMapping("/{brand}/{model}")
-    public String postSpecifyModel(@PathVariable String brand, @PathVariable String model, @ModelAttribute CarSpec carSpec,
-                                   BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "redirect:/specification/{brand}/{model}";
-        return "test";
-    }*/
+    @PostMapping("/{brand}/{model}")
+    public String postSpecifyModel(@RequestParam String offer, @ModelAttribute SearchSession session){
+        session.setUrl(offer);
+        return "redirect:/specification/{brand}/{model}/offer";
+    }
+    @GetMapping("{brand}/{model}/offer")
+    public String getOfferView(@ModelAttribute SearchSession session, Model model) throws IOException {
+        OfferDisplayService displayService = new OfferDisplayService(session.getUrl());
+        model.addAttribute("prize", displayService.getOffersPrice());
+        return "OfferView";
+    }
 }

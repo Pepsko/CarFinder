@@ -5,11 +5,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class OfferDisplayService {
     private Document offersPage;
@@ -52,4 +50,23 @@ public class OfferDisplayService {
         }
         return params;
     }
+    public Map<String, String> getMainCarPhotosWithThumbs(){
+        Map<String, String> photos = new HashMap<>();
+        Elements tags = offersPage.select("div[offer-photos-thumbs]");
+        tags = tags.select("a[href]");
+        for (Element tag: tags) {
+            photos.put(tag.attr("data-thumb"),tag.attr("href"));
+        }
+        return photos;
+    }
+    public Set<String> getAllCarPhotos(){
+        Set<String> photos = new HashSet<>();
+        Elements tags = offersPage.select("div[class=photo-item]");
+        tags = tags.select("img[class]");
+        for (Element tag: tags) {
+            photos.add(tag.attr("src"));
+        }
+        return photos;
+    }
+
 }

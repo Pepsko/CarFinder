@@ -13,7 +13,7 @@ public class CarDTO {
     private Integer mileage;
   //  private String fuel;
     private String color;
- //   private URL url;
+    private String url;
 
     public CarDTO(Integer id, String brand, String model, Integer horsePower, String bodyType, String engine, Integer productionYear, String drivetrain, Integer mileage, String color) {
         this.id = id;
@@ -27,6 +27,20 @@ public class CarDTO {
         this.mileage = mileage;
        // this.fuel = fuel;
         this.color = color;
+    }
+
+    public CarDTO(Integer id, String brand, String model, Integer horsePower, String bodyType, String engine, Integer productionYear, String drivetrain, Integer mileage, String color, String url) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.horsePower = horsePower;
+        this.bodyType = bodyType;
+        this.engine = engine;
+        this.productionYear = productionYear;
+        this.drivetrain = drivetrain;
+        this.mileage = mileage;
+        this.color = color;
+        this.url = url;
     }
 
     public CarDTO(String brand, String model) {

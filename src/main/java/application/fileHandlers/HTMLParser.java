@@ -28,13 +28,11 @@ public class HTMLParser {
         String url = service.getSearchUrlBySpec(spec);
         System.out.println(url);*/
        Document doc = Jsoup.connect("https://www.otomoto.pl/oferta/bmw-x6-3-0d236kmrelingbi-xenonbialaalu-20-full-ID6zWpKB.html#20ed6d85fd").get();
-       Elements links = doc.select("div[id=parameters]");
-       Elements keys = links.select("span[class=offer-params__label]");
-       Elements values = links.select("div[class=offer-params__value]");
-        Map<String, String> params = new TreeMap<>();
-        for (int i = 0; i <values.size() ; i++) {
-            params.put(keys.get(i).text(), values.get(i).text());
+       Elements tags = doc.select("div[class=offer-photos-thumbs]");
+       tags = tags.select("a[href]");
+        for (Element tag: tags) {
+            System.out.println(tag.attr("href"));
+            System.out.println(tag.attr("data-thumb"));
         }
-
     }
 }
