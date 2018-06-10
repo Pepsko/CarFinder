@@ -12,6 +12,6 @@
     <title>Offer View</title>
 </head>
 <body>
-${prize}
+
 </body>
 </html>

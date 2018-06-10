@@ -2,10 +2,8 @@ package application.controller;
 
 import application.car.CarService;
 import application.detailedSearch.CarSpec;
-import application.detailedSearch.OfferDisplayService;
 import application.detailedSearch.SearchService;
 import application.fileHandlers.CSVCarList;
-import application.fileHandlers.HTMLParser;
 import application.session.SearchSession;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
@@ -26,6 +24,7 @@ public class CarSpecController {
     private final SearchService searchService;
     private Map<String, String> offers;
     private Map<String, String> images;
+    private Map<String, String> pages;
 
 
 
@@ -64,28 +63,38 @@ public class CarSpecController {
     @PostMapping("/{brand}")
     public String postSpecifyBrand( @ModelAttribute CarSpec carSpec, BindingResult bindingResult) throws IOException {
         if(bindingResult.hasErrors()) return "redirect:/specification/{brand}";
-        Elements hrefs = HTMLParser.getOffersLinksFromUrl(searchService.getSearchUrlBySpec(carSpec));
+        Elements hrefs = searchService.getOffersLinks(carSpec);
         offers = searchService.collectCarOffers(hrefs);
         images = searchService.mapOffersImages(hrefs);
+        pages = searchService.getPagesOfSearch(carSpec);
         return "redirect:/specification/{brand}/"+carSpec.getModel();
     }
     @GetMapping("/{brand}/{model}")
-    public String specifyModel(/*@PathVariable String brand, @PathVariable String model, */Model attributes){
-        //attributes.addAttribute("brand", brand);
-        //attributes.addAttribute("models", model);
+    public String specifyModel(Model attributes){
         attributes.addAttribute("offers",offers);
         attributes.addAttribute("images", images);
+        attributes.addAttribute("pages", pages);
         return "OffersDisplay";
     }
-    @PostMapping("/{brand}/{model}")
-    public String postSpecifyModel(@RequestParam String offer, @ModelAttribute SearchSession session){
+    @RequestMapping(value = {"/{brand}/{model}","/{brand}/{model}/page"}, params = {"offer","!pages"}, method = RequestMethod.POST)
+    public String postSeeOffer(@RequestParam String offer, @ModelAttribute SearchSession session){
         session.setUrl(offer);
-        return "redirect:/specification/{brand}/{model}/offer";
+        return "redirect:/{brand}/{model}/offer";
     }
-    @GetMapping("{brand}/{model}/offer")
-    public String getOfferView(@ModelAttribute SearchSession session, Model model) throws IOException {
-        OfferDisplayService displayService = new OfferDisplayService(session.getUrl());
-        model.addAttribute("prize", displayService.getOffersPrice());
-        return "OfferView";
+    @RequestMapping(value ={"/{brand}/{model}","/{brand}/{model}/page"}, params = {"!offer","pages"}, method = RequestMethod.POST)
+    public String postSwitchPage( @RequestParam String pages, @ModelAttribute SearchSession session) throws IOException {
+        this.pages = searchService.getPagesOfSearch(pages);
+        Elements hrefs = searchService.getOffersLinks(pages);
+        offers = searchService.collectCarOffers(hrefs);
+        images = searchService.mapOffersImages(hrefs);
+        return "redirect:/specification/{brand}/{model}/page";
     }
+    @GetMapping(value = "/{brand}/{model}/page")
+    public String getAnotherPage(Model attributes){
+        attributes.addAttribute("offers",offers);
+        attributes.addAttribute("images", images);
+        attributes.addAttribute("pages", pages);
+        return "OffersDisplay";
+    }
+
 }

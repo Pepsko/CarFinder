@@ -34,9 +34,8 @@ public class OfferDisplayService {
         String string = links.select("div[data-read-more]").toString();
         String substring = string.substring(string.indexOf(">")+1);
         String[] brs = substring.split("<br>");
-        List<String> br = new LinkedList<>();
         for (int i =0; i <brs.length-1 ; i++) {
-            br.add(brs[i]);
+            lines.add(brs[i]);
         }
         return lines;
     }

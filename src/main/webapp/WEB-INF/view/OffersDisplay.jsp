@@ -14,8 +14,12 @@
 </head>
 <body>
 <form:form method="post" modelAttribute="carSpec">
-<c:forEach items="${offers}" var="item"><button type="submit" name="offer" value="${item.key}">${item.value}<img src="${images.get(item.key)}"></button><br></c:forEach>
+<c:forEach items="${offers}" var="item">
+    <button type="submit" name="offer" value="${item.key}">${item.value}<img src="${images.get(item.key)}"></button><br>
+</c:forEach>
+<c:forEach items="${pages}" var="item">
+    <button type="submit" name="pages" value="${item.value}">${item.key}</button>
+</c:forEach>
 </form:form>
-
 </body>
 </html>
